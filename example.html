@@ -6,7 +6,14 @@
   </head>
 
   <body>
-    <p>Click the button to fill form fields in an existing PDF document with <code>pdf-lib</code></p>
+    <h1>National Mail Registration Form</h1>
+    <form id="nvrf">
+      <input type="text" id="first-name" placeholder="First Name"/>
+      <div>
+        <input type="checkbox" id="second-suffix"/>
+        <label for="second-suffix">II </label>
+      </div>
+    </form>
     <button onclick="fillForm()">Fill PDF</button>
     <p class="small">(Your browser will download the resulting file)</p>
   </body>
@@ -25,11 +32,28 @@
       // Get the form containing all the fields
       const form = pdfDoc.getForm()
 
+      //Optional - print the names of all form fields
+      /*const fields = form.getFields()
+      fields.forEach(field => {
+        const type = field.constructor.name
+        const name = field.getName()
+        console.log(`${type}: ${name}`)
+      })*/
+
       // Get all fields in the PDF by their names
+      const secondSuffix = form.getCheckBox('II');
       const firstName = form.getTextField('First Name');
 
-      // Fill in the basic info fields
-      firstName.setText('Samira');
+      //Get all field values in the web form by their names
+      const secondSuffixCheck = document.getElementById('second-suffix').checked;
+      const firstNameText = document.getElementById('first-name').value;
+
+      // Fill in the pdf fields
+      console.log(secondSuffixCheck);
+      if (secondSuffixCheck) {
+        secondSuffix.check();
+      }
+      firstName.setText(firstNameText);
 
       // Serialize the PDFDocument to bytes (a Uint8Array)
       const pdfBytes = await pdfDoc.save()
