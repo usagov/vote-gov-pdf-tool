@@ -8,6 +8,15 @@
   <body>
     <h1>National Mail Registration Form</h1>
     <form id="nvrf">
+      <div>
+        <label for="salutations">Title: </label>
+        <select id="salutations" name="salutations">
+          <option value="Mr">Mr.</option>
+          <option value="Mrs">Mrs.</option>
+          <option value="Miss">Miss</option>
+          <option value="Ms">Ms.</option>
+        </select>
+      </div>
       <input type="text" id="first-name" placeholder="First Name"/>
       <div>
         <input type="checkbox" id="second-suffix"/>
@@ -41,19 +50,29 @@
       })*/
 
       // Get all fields in the PDF by their names
-      const secondSuffix = form.getCheckBox('II');
+      const title =  form.getRadioGroup('salutation');
+      const title2 = form.getRadioGroup('salutation_2')
       const firstName = form.getTextField('First Name');
+      const secondSuffix = form.getCheckBox('II');
 
       //Get all field values in the web form by their names
-      const secondSuffixCheck = document.getElementById('second-suffix').checked;
+      const titleText = document.getElementById('salutations').value;
       const firstNameText = document.getElementById('first-name').value;
+      const secondSuffixCheck = document.getElementById('second-suffix').checked;
 
       // Fill in the pdf fields
-      console.log(secondSuffixCheck);
+      // Logic for title select has to be seperated into two radio groups
+      if (titleText == 'Mr' || titleText == "Mrs"){
+        title.select(titleText);
+      } else {
+        title2.select(titleText);
+      }
+
+      firstName.setText(firstNameText);
+
       if (secondSuffixCheck) {
         secondSuffix.check();
       }
-      firstName.setText(firstNameText);
 
       // Serialize the PDFDocument to bytes (a Uint8Array)
       const pdfBytes = await pdfDoc.save()
