@@ -6,7 +6,7 @@
   </head>
 
   <body>
-    <h1>National Mail Registration Form</h1>
+    <h1>National Mail Registration Form Demo</h1>
     <form id="nvrf">
       <div>
         <label for="salutations">Title: </label>
@@ -32,7 +32,7 @@
 
     async function fillForm() {
     	// Fetch the PDF with form fields
-      const formUrl = 'https://www.eac.gov/sites/default/files/eac_assets/1/6/Federal_Voter_Registration_ENG.pdf'
+      const formUrl = './Federal_Voter_Registration_ENG.pdf'
       const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer())
 
       // Load a PDF with form fields
