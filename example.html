@@ -32,7 +32,7 @@
 
     async function fillForm() {
     	// Fetch the PDF with form fields
-      const formUrl = 'https://www.eac.gov/sites/default/files/eac_assets/1/6/Federal_Voter_Registration_ENG.pdf'
+      const formUrl = './Federal_Voter_Registration_ENG.pdf'
       const formPdfBytes = await fetch(formUrl).then(res => res.arrayBuffer())
 
       // Load a PDF with form fields
@@ -42,12 +42,12 @@
       const form = pdfDoc.getForm()
 
       //Optional - print the names of all form fields
-      /*const fields = form.getFields()
+      const fields = form.getFields()
       fields.forEach(field => {
         const type = field.constructor.name
         const name = field.getName()
         console.log(`${type}: ${name}`)
-      })*/
+      })
 
       // Get all fields in the PDF by their names
       const title =  form.getRadioGroup('salutation');
