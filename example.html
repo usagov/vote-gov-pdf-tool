@@ -42,12 +42,12 @@
       const form = pdfDoc.getForm()
 
       //Optional - print the names of all form fields
-      const fields = form.getFields()
+      /*const fields = form.getFields()
       fields.forEach(field => {
         const type = field.constructor.name
         const name = field.getName()
         console.log(`${type}: ${name}`)
-      })
+      })*/
 
       // Get all fields in the PDF by their names
       const title =  form.getRadioGroup('salutation');
